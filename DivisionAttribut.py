@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 
 def DivisionAttribut(data):
-    global Einf, Esup, Et, E, j
+    global Einf, Esup, E, j
     target = data.columns[-1]
     MinE = 10 ; so = []
     for attr in data.columns.delete(-1):
@@ -33,7 +33,7 @@ def DivisionAttribut(data):
                     MinE = E ; j = attr ; so = s
         else: #la variable est qualitative
             if (len(np.unique(data[attr])) >= 2):
-                E = 0 ; Et = 0
+                E = 0
                 N = len(data[attr])
                 for s in data[attr].value_counts().index:
                     t = list((data.loc[data[attr] == s, target]).value_counts())
