@@ -49,11 +49,11 @@ def Prediction(Arbre,X):
 
 
 """GenerationArbre"""
-def GenerationArbre(Noeud):
+def GenerationArbre(Noeud, seuil):
     data = Noeud.data
     [attr, so, MinE] = DivisionAttribut(data)
     #print([attr, so, MinE])
-    if(MinE > 0 and MinE != 10):
+    if(MinE > seuil and MinE != 10):
         Noeud.var = [attr, so]
         if  data[attr].dtypes == 'float64':
             noeud = Node(data.loc[data[attr] <= so])
@@ -73,7 +73,7 @@ def GenerationArbre(Noeud):
                     noeud.parent = Noeud
                     
         for child in Noeud.child:
-                GenerationArbre(child)
+                GenerationArbre(child, seuil)
     else:
         Noeud.leaf = True
     
