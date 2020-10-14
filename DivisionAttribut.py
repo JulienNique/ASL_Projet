@@ -39,8 +39,7 @@ def DivisionAttribut(data):
                     t = list((data.loc[data[attr] == s, target]).value_counts())
                     Nt = np.sum(t)
                     for n in t:
-                        Et = Et - n/Nt*np.log2(n/Nt)
-                    E = Nt/N*Et + E
+                        E = E -Nt/N*(n/Nt*np.log2(n/Nt))
                 if (E < MinE):
                     MinE = E ; j = attr
         
