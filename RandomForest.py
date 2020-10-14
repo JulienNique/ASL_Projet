@@ -42,8 +42,12 @@ target = (iris.target).reshape(len(iris.target),1)
 data = pd.DataFrame(np.concatenate((iris.data, target), axis = 1),
                     columns = ['sepl', 'sepw', 'petl', 'petw', 'spec'])
 
-noeud = Node(data)
-forest = RandomForest(noeud,10)
+data_train, data_test = train_test_split(data, test_size=0.30)
 
-x = data.iloc[[60,61],:]
-print(RFPrediction(forest, x))
+noeud = Node(data_train)
+forest = RandomForest(noeud,5)
+
+#x = data.iloc[range(60,71),:]
+ypred = RFPrediction(forest, data_test)
+score = sum(ypred == data_test['spec'])/len(ypred)
+print('Le score est de :', score)
