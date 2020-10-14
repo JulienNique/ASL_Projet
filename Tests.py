@@ -24,7 +24,7 @@ data_train, data_test = train_test_split(data, test_size=0.30)
 
 """Entrainement du modèle"""
 Racine = Node(data_train)
-arbre = GenerationArbre(Racine)
+arbre = GenerationArbre(Racine, 0)
 
 """Prédictions et score"""
 ypred = Prediction(arbre,data_test)
@@ -41,7 +41,7 @@ print('Le score est de :', score)
 # data_train, data_test = train_test_split(data, test_size=0.20)
 
 # Racine = Node(data_train)
-# arbre = GenerationArbre(Racine)
+# arbre = GenerationArbre(Racine, 0)
 
 # ypred = Prediction(arbre,data_test)
 # score = sum(ypred == data_test['Y'])/len(ypred)
