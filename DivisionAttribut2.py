@@ -7,7 +7,7 @@ def DivisionAttribut2(data):
       #print(data.columns[col_index])
       unique_values = np.unique(data.iloc[:,col_index]) #get les val uniq
       if data.iloc[:,col_index].dtypes == "float64":
-        print(data.columns[col_index], "est quanti")
+        #print(data.columns[col_index], "est quanti")
       
         for i in range(1,len(unique_values)):
           seuil = (unique_values[i] + unique_values[i-1])/2
@@ -29,12 +29,11 @@ def DivisionAttribut2(data):
           E = Ninf/N*Einf + Nsup/N*Esup
           if (E < MinE):
             MinE = E ; j = data.columns[col_index] ; so = seuil
-    #print(MinE)
-    #print([j, so, MinE])
+    
     
       else:
         attr = data.columns[col_index]
-        print(attr, 'est quali')
+        #print(attr, 'est quali')
         if (len(np.unique(data[attr])) >= 2):
           E = 0
           N = len(data[attr])
@@ -43,6 +42,6 @@ def DivisionAttribut2(data):
             Nt = np.sum(t)
             for n in t:
               E = E -Nt/N*(n/Nt*np.log2(n/Nt))
-              if (E < MinE):
-                MinE = E ; j = attr ; so = 'nn'
-    print([j, so, MinE])
+          if (E < MinE):
+            MinE = E ; j = attr ; so = 'nn'
+    return [j, so, MinE]
