@@ -14,7 +14,7 @@ def RFDivisionAttribut(data):
     target = data.columns[-1]
     MinE = 10 ; so = []
     for attr in data.columns.delete(-1):
-        if data[attr].dtypes == 'float64': #la variable est quantitative
+        if data[attr].dtypes == 'float64': #la splitiable est quantitative
             for s in data[attr].value_counts().index:
                 tinf = list((data.loc[data[attr] <= s, target]).value_counts())
                 tsup = list((data.loc[data[attr] > s, target]).value_counts())
@@ -31,7 +31,7 @@ def RFDivisionAttribut(data):
                 E = Ninf/N*Einf + Nsup/N*Esup
                 if (E < MinE):
                     MinE = E ; j = attr ; so = s
-        else: #la variable est qualitative
+        else: #la splitiable est qualitative
             if (len(np.unique(data[attr])) >= 2):
                 E = 0
                 N = len(data[attr])

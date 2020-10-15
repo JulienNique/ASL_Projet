@@ -14,7 +14,7 @@ class Node:
         self.child = []
         self.parent = None
         self.classeMaj = data.iloc[:,-1].value_counts().idxmax()
-        self.var = []
+        self.split = []
         self.leaf = False
 
     def __str__(self):
@@ -22,7 +22,7 @@ class Node:
 
 def ParcoursArbre(Arbre):
     print(Arbre.leaf)
-    print(Arbre.var)
+    print(Arbre.split)
     print(Arbre.classeMaj)
     print('\n')
     if Arbre.child != []:
@@ -34,14 +34,14 @@ def Prediction(Arbre,X):
     for index, x in X.iterrows():
         noeud = Arbre
         while noeud.leaf == False:
-            #print(noeud.var)
-            if len(noeud.var) == 2:
-                if x[noeud.var[0]] <= noeud.var[1]:
+            #print(noeud.split)
+            if len(noeud.split) == 2:
+                if x[noeud.split[0]] <= noeud.split[1]:
                     noeud = noeud.child[0]
                 else:
                     noeud = noeud.child[1]
             else:
-                pos = noeud.var[1:].index(x[noeud.var[0]])-1
+                pos = noeud.split[1:].index(x[noeud.split[0]])-1
                 noeud = noeud.child[pos]
                 
         ypred.append(noeud.classeMaj)
@@ -54,7 +54,7 @@ def GenerationArbre(Noeud, seuil):
     [attr, so, MinE] = DivisionAttribut(data)
     #print([attr, so, MinE])
     if(MinE > seuil and MinE != 10):
-        Noeud.var = [attr, so]
+        Noeud.split = [attr, so]
         if  data[attr].dtypes == 'float64':
             noeud = Node(data.loc[data[attr] <= so])
             Noeud.child.append(noeud)
@@ -64,10 +64,10 @@ def GenerationArbre(Noeud, seuil):
             Noeud.child.append(noeud)
             noeud.parent = Noeud
         else:
-            Noeud.var.pop(1)
+            Noeud.split.pop(1)
             if len(np.unique(data[attr])) >= 2:
                 for val in data[attr].value_counts().index:
-                    Noeud.var.append(val)
+                    Noeud.split.append(val)
                     noeud = Node(data.loc[data[attr] == val])
                     Noeud.child.append(noeud)
                     noeud.parent = Noeud
