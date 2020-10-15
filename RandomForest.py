@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from collections import Counter
 
 
-def RandomForest(Noeud, n):
+def RandomForest(Noeud, seuil, n, p):
     forest = []
     for k in range(0,n):
         nrow = (Noeud.data).shape[0]
@@ -19,7 +19,7 @@ def RandomForest(Noeud, n):
         dataBS = Noeud.data.iloc[rows,:]
         
         racine = Node(dataBS)
-        arbre = GenerationArbre(racine)
+        arbre = RFGenerationArbre(racine, seuil, p)
         forest.append(arbre)
     return forest
 
@@ -45,7 +45,7 @@ data = pd.DataFrame(np.concatenate((iris.data, target), axis = 1),
 data_train, data_test = train_test_split(data, test_size=0.30)
 
 noeud = Node(data_train)
-forest = RandomForest(noeud,5)
+forest = RandomForest(noeud, 0, 5, 2)
 
 #x = data.iloc[range(60,71),:]
 ypred = RFPrediction(forest, data_test)

@@ -15,6 +15,7 @@ class Node:
         self.parent = None
         self.classeMaj = data.iloc[:,-1].value_counts().idxmax()
         self.split = []
+        self.var = data.columns.delete(-1)
         self.leaf = False
 
     def __str__(self):
@@ -52,6 +53,38 @@ def Prediction(Arbre,X):
 def GenerationArbre(Noeud, seuil):
     data = Noeud.data
     [attr, so, MinE] = DivisionAttribut(data)
+    #print([attr, so, MinE])
+    if(MinE > seuil and MinE != 10):
+        Noeud.split = [attr, so]
+        if  data[attr].dtypes == 'float64':
+            noeud = Node(data.loc[data[attr] <= so])
+            Noeud.child.append(noeud)
+            noeud.parent = Noeud    
+            
+            noeud = Node(data.loc[data[attr] > so])
+            Noeud.child.append(noeud)
+            noeud.parent = Noeud
+        else:
+            Noeud.split.pop(1)
+            if len(np.unique(data[attr])) >= 2:
+                for val in data[attr].value_counts().index:
+                    Noeud.split.append(val)
+                    noeud = Node(data.loc[data[attr] == val])
+                    Noeud.child.append(noeud)
+                    noeud.parent = Noeud
+                    
+        for child in Noeud.child:
+                GenerationArbre(child, seuil)
+    else:
+        Noeud.leaf = True
+    
+    return Noeud
+
+
+"""RFGenerationArbre"""
+def RFGenerationArbre(Noeud, seuil):
+    data = Noeud.data
+    [attr, so, MinE] = RFDivisionAttribut(data)
     #print([attr, so, MinE])
     if(MinE > seuil and MinE != 10):
         Noeud.split = [attr, so]

@@ -9,12 +9,12 @@ Created on Mon Oct 12 11:54:58 2020
 import pandas as pd
 import numpy as np
 
-def RFDivisionAttribut(data):
+def RFDivisionAttribut(data, p):
     global Einf, Esup, E, j
     target = data.columns[-1]
     MinE = 10 ; so = []
-    for attr in data.columns.delete(-1):
-        if data[attr].dtypes == 'float64': #la splitiable est quantitative
+    for attr in data.var:
+        if data[attr].dtypes == 'float64': #la variable est quantitative
             for s in data[attr].value_counts().index:
                 tinf = list((data.loc[data[attr] <= s, target]).value_counts())
                 tsup = list((data.loc[data[attr] > s, target]).value_counts())
@@ -31,7 +31,7 @@ def RFDivisionAttribut(data):
                 E = Ninf/N*Einf + Nsup/N*Esup
                 if (E < MinE):
                     MinE = E ; j = attr ; so = s
-        else: #la splitiable est qualitative
+        else: #la variable est qualitative
             if (len(np.unique(data[attr])) >= 2):
                 E = 0
                 N = len(data[attr])
