@@ -6,13 +6,15 @@ Created on Tue Oct 13 13:29:50 2020
 """
 
 import random
+from DivisionAttribut import *
+from DivisionAttribut2 import *
 from Node import *
 from sklearn.model_selection import train_test_split
 
 """Test sur IRIS"""
 from sklearn.datasets import load_iris
 
-"""Récupération des données et ajout d'une splitiable catégorielle fictive"""
+"""Récupération des données et ajout d'une variable catégorielle fictive"""
 iris = load_iris()
 target = (iris.target).reshape(len(iris.target),1)
 data = pd.DataFrame(np.concatenate((iris.data, target), axis = 1),

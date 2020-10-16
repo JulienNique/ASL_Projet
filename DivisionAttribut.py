@@ -16,8 +16,8 @@ def DivisionAttribut(data):
     for attr in data.columns.delete(-1):
         if data[attr].dtypes == 'float64': #la variable est quantitative
             for s in data[attr].value_counts().index:
-                tinf = list((data.loc[data[attr] <= s, target]).value_counts())
-                tsup = list((data.loc[data[attr] > s, target]).value_counts())
+                tinf = data.loc[data[attr] <= s, target].value_counts()
+                tsup = data.loc[data[attr] > s, target].value_counts()
                 #calcul de l'entropie associée au seuil s
                 Ninf = np.sum(tinf) ; Nsup = np.sum(tsup) ; N = Ninf + Nsup
                 if (Ninf != 0):

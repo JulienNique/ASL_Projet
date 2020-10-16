@@ -1,3 +1,5 @@
+import numpy as np
+
 def DivisionAttribut2(data):
     global Einf, Esup, E, j
     target = data.columns[-1]
