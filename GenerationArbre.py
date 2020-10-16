@@ -13,9 +13,9 @@ from RFDivisionAttribut import *
 """GenerationArbre"""
 def GenerationArbre(Noeud, seuil):
     data = Noeud.data
-    [attr, so, MinE] = DivisionAttribut(data)
-    #print([attr, so, MinE])
-    if(MinE > seuil and MinE != 10):
+    [attr, so, MinE] = DivisionAttribut2(data)
+    print([attr, so, MinE])
+    if(MinE <= seuil and MinE != 10):
         Noeud.split = [attr, so]
         if  data[attr].dtypes == 'float64':
             noeud = Node(data.loc[data[attr] <= so])
@@ -28,6 +28,7 @@ def GenerationArbre(Noeud, seuil):
         else:
             Noeud.split.pop(1)
             if len(np.unique(data[attr])) >= 2:
+                print('creation de child')
                 for val in data[attr].value_counts().index:
                     Noeud.split.append(val)
                     noeud = Node(data.loc[data[attr] == val])
@@ -35,7 +36,7 @@ def GenerationArbre(Noeud, seuil):
                     noeud.parent = Noeud
                     
         for child in Noeud.child:
-                GenerationArbre(child, seuil)
+            GenerationArbre(child, seuil)
     else:
         Noeud.leaf = True
     
@@ -47,7 +48,7 @@ def RFGenerationArbre(Noeud, seuil, p):
     data = Noeud.data
     [attr, so, MinE] = RFDivisionAttribut2(Noeud, p)
     #print([attr, so, MinE])
-    if(MinE > seuil and MinE != 10):
+    if(MinE <= seuil and MinE != 10):
         Noeud.split = [attr, so]
         if  data[attr].dtypes == 'float64':
             noeud = Node(data.loc[data[attr] <= so])

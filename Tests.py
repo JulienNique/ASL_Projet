@@ -18,14 +18,15 @@ iris = load_iris()
 target = (iris.target).reshape(len(iris.target),1)
 data = pd.DataFrame(np.concatenate((iris.data, target), axis = 1),
                    columns = ['sepl', 'sepw', 'petl', 'petw', 'spec'])
-data.insert(loc = 4, column = 'Cat', value = random.choices(['a','b','c'], k = 150))
+#data.insert(loc = 4, column = 'Cat', value = random.choices(['a','b'], k = 150))
+data.insert(loc = 4, column = 'Cat', value = np.repeat(['a','b','c'], 50))
 
 """Création d'un jeu de données d'entrainement et d'un jeu de données pour le test"""
-data_train, data_test = train_test_split(data, test_size=0.30)
+data_train, data_test = train_test_split(data, test_size=0.1)
 
 """Entrainement du modèle"""
 Racine = Node(data_train)
-arbre = GenerationArbre(Racine, 0)
+arbre = GenerationArbre(Racine, 1)
 
 """Prédictions et score"""
 ypred = Prediction(arbre,data_test)

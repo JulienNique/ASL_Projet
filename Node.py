@@ -21,9 +21,10 @@ class Node:
 
 def ParcoursArbre(Arbre):
     print(Arbre.leaf)
-#    print(Arbre.split)
-#    print(Arbre.classeMaj)
-#    print('\n')
+    print(Arbre.split)
+    print(Arbre.var)
+#    print(Arbre.classeMaj
+    print('\n')
 
     if Arbre.child != []:
         for child in Arbre.child:
@@ -34,14 +35,15 @@ def Prediction(Arbre,X):
     for index, x in X.iterrows():
         noeud = Arbre
         while noeud.leaf == False:
-            #print(noeud.split)
+            print(noeud.split)
             if len(noeud.split) == 2:
                 if x[noeud.split[0]] <= noeud.split[1]:
                     noeud = noeud.child[0]
                 else:
                     noeud = noeud.child[1]
             else:
-                pos = noeud.split[1:].index(x[noeud.split[0]])-1
+                pos = noeud.split[1:].index(x[noeud.split[0]])
+                print(pos)
                 noeud = noeud.child[pos]
                 
         ypred.append(noeud.classeMaj)
