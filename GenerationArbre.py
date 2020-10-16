@@ -5,6 +5,10 @@ Created on Fri Oct 16 08:46:30 2020
 @author: julien
 """
 
+from Node import *
+from DivisionAttribut import *
+from DivisionAttribut2 import *
+from RFDivisionAttribut import *
 
 """GenerationArbre"""
 def GenerationArbre(Noeud, seuil):

@@ -5,7 +5,10 @@ Created on Fri Oct 16 08:49:51 2020
 @author: julien
 """
 
+from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_iris 
+from RandomForest import *
+
 iris = load_iris()
 target = (iris.target).reshape(len(iris.target),1)
 data = pd.DataFrame(np.concatenate((iris.data, target), axis = 1),

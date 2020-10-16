@@ -6,8 +6,7 @@ Created on Tue Oct 13 13:29:50 2020
 """
 
 import random
-from DivisionAttribut import *
-from DivisionAttribut2 import *
+from GenerationArbre import *
 from Node import *
 from sklearn.model_selection import train_test_split
 

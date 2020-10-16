@@ -5,10 +5,6 @@ Created on Tue Oct 13 10:43:27 2020
 @author: jnique
 """
 
-from DivisionAttribut import *
-from DivisionAttribut2 import *
-from RFDivisionAttribut import *
-
 class Node:
 
     def __init__(self, data):

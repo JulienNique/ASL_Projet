@@ -5,14 +5,12 @@ Created on Tue Oct 13 19:31:26 2020
 @author: julien
 """
 import random
-from DivisionAttribut import *
-from RFDivisionAttribut import *
 from Node import *
-from sklearn.model_selection import train_test_split
-from collections import Counter
-
+from GenerationArbre import *
+from RFDivisionAttribut import *
 
 def RandomForest(Noeud, seuil, n, p):
+    #n est le nombre d'arbres, p est le nombre de variables choisies aléatoirement
     forest = []
     for k in range(0,n):
         nrow = (Noeud.data).shape[0]
