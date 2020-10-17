@@ -6,16 +6,16 @@ Created on Fri Oct 16 08:46:30 2020
 """
 
 from Node import *
-from DivisionAttribut import *
+#from DivisionAttribut import *
 from DivisionAttribut2 import *
 from RFDivisionAttribut import *
 
 """GenerationArbre"""
 def GenerationArbre(Noeud, seuil):
-    data = Noeud.data
-    [attr, so, MinE] = DivisionAttribut2(data)
-    print([attr, so, MinE])
-    if(MinE <= seuil and MinE != 10):
+    data = Noeud.data #on initialise les data avec celles du noeud courant
+    [attr, so, MinE] = DivisionAttribut2(data) #on récupère la variable attr pour la prochaine division
+    #print([attr, so, MinE])
+    if(MinE <= seuil and MinE != 10): #on teste que l'entropie est inférieure au seuil fixé pour l'arbre
         Noeud.split = [attr, so]
         if  data[attr].dtypes == 'float64':
             noeud = Node(data.loc[data[attr] <= so])
@@ -28,7 +28,7 @@ def GenerationArbre(Noeud, seuil):
         else:
             Noeud.split.pop(1)
             if len(np.unique(data[attr])) >= 2:
-                print('creation de child')
+                #print('creation de child')
                 for val in data[attr].value_counts().index:
                     Noeud.split.append(val)
                     noeud = Node(data.loc[data[attr] == val])
