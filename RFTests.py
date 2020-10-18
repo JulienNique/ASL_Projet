@@ -17,7 +17,7 @@ data = pd.DataFrame(np.concatenate((iris.data, target), axis = 1),
 data_train, data_test = train_test_split(data, test_size=0.30)
 
 noeud = Node(data_train)
-forest = RandomForest(noeud, 1, 5, 3)
+forest = RandomForest(noeud, 1, 30, 3)
 
 #x = data.iloc[range(60,71),:]
 ypred = RFPrediction(forest, data_test)
