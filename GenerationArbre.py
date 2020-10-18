@@ -58,7 +58,7 @@ def RFGenerationArbre(Noeud, seuil, p):
     #print([attr, so, MinE])
     if(MinE <= seuil and MinE != 10):
         Noeud.split = [attr, so]
-        if  data[attr].dtypes == 'float64':
+        if  (data[attr].dtypes == 'float64' or data[attr].dtypes == 'int64'):
             noeud = Node(data.loc[data[attr] <= so])
             Noeud.child.append(noeud)
             noeud.parent = Noeud    

@@ -16,7 +16,7 @@ def RFDivisionAttribut(Noeud, p):
     target = data.columns[-1]
     MinE = 10 ; so = []
     for attr in np.unique(random.choices(Noeud.var, k = p)):
-        if data[attr].dtypes == 'float64': #la variable est quantitative
+        if (data[attr].dtypes == 'float64' or data[attr].dtypes == 'int64'): #la variable est quantitative
             for s in data[attr].value_counts().index:
                 tinf = data.loc[data[attr] <= s, target].value_counts()
                 tsup = data.loc[data[attr] > s, target].value_counts()
@@ -55,7 +55,7 @@ def RFDivisionAttribut2(Noeud, p):
     j = []; MinE = 10 ; so = []
     if len(np.unique(data.iloc[:,-1])) >= 2: #on teste si il y a au moins deux targets 
         for attr in np.unique(random.choices(Noeud.var, k = p)):
-            if data[attr].dtypes == 'float64': #la variable est quantitative
+            if (data[attr].dtypes == 'float64' or data[attr].dtypes == 'int64'): #la variable est quantitative
                 unique_values = np.unique(data[attr])
                 for i in range(1,len(unique_values)):
                     s = (unique_values[i] + unique_values[i-1])/2
