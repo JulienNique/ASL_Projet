@@ -53,7 +53,7 @@ def GenerationArbre(Noeud, seuil):
 """RFGenerationArbre pour Random Forest"""
 def RFGenerationArbre(Noeud, seuil, p):
     data = Noeud.data
-    [attr, so, MinE] = RFDivisionAttribut2(Noeud, p)
+    [attr, so, MinE] = RFDivisionAttribut(Noeud, p)
     #print([attr, so, MinE])
     if(MinE <= seuil and MinE != 10):
         Noeud.split = [attr, so]
