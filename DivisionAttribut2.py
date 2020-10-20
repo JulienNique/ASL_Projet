@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-#la fonction Division Attribut2 prend en argument les données du noeud courant dans la construction de l'arbre
-def DivisionAttribut2(data):
+#la fonction Division Attribut prend en argument les données du noeud courant dans la construction de l'arbre
+def DivisionAttribut(data):
     global Einf, Esup, E
     target = data.columns[-1] #target contient la variable cible
     ncol = data.shape[1] #le nombre de colonnes dans le dataframe data
@@ -38,13 +38,13 @@ def DivisionAttribut2(data):
               if (E < MinE):
                 #on met à jour la variable j qui contient le nom de la variable qui réalise le meilleur split,
                 #la valeur de l'entropie correspondante et le seuil
-                MinE = E ; j = data.columns[col_index] ; so = seuil
-        
+                MinE = E ; j = data.columns[col_index] ; so = seuil        
         
           else: #la variable est qualitative
             attr = data.columns[col_index]
             #on teste que la variable contient au moins deux modalités
             if (len(np.unique(data[attr])) >= 2):
+              #on calcule l'entropie
               E = 0
               N = len(data[attr])
               for s in data[attr].value_counts().index:
@@ -52,7 +52,9 @@ def DivisionAttribut2(data):
                 Nt = np.sum(t)
                 for n in t:
                   E = E -Nt/N*(n/Nt*np.log2(n/Nt))
+              #on teste si l'entropie est meilleure que la précédente calculée
               if (E < MinE):
-                MinE = E ; j = attr ; so = 'nn' #on met à jour la variable j
+                #on met à jour
+                MinE = E ; j = attr ; so = 'nn'
         
     return [j, so, MinE]

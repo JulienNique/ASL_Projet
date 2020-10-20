@@ -31,7 +31,7 @@ data = pd.DataFrame(np.concatenate((iris.data, target), axis = 1),
 """Prédictions et scores"""
 scores = []
 for nbtests in range(10):
-    data_train, data_test = train_test_split(data, test_size=0.95)
+    data_train, data_test = train_test_split(data, test_size=0.30)
     Racine = Node(data_train)
     arbre = GenerationArbre(Racine, 1)
     ypred = Prediction(arbre,data_test)

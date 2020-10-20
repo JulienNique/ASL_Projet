@@ -16,13 +16,13 @@ def GenerationArbre(Noeud, seuil):
     data = Noeud.data
     #on récupère la variable attr pour la prochaine division, le seuil so si cette variable est numérique
     #et l'entropie MinE
-    [attr, so, MinE] = DivisionAttribut2(data)
+    [attr, so, MinE] = DivisionAttribut(data)
     #on teste que l'entropie est inférieure au seuil fixé pour l'arbre
     if(MinE <= seuil):
         #on met à jour les informations du node Noeud et on crée les noeuds descendants
         Noeud.split = [attr, so]
         #pour une variable numérique
-        if  data[attr].dtypes == 'float64':
+        if  (data[attr].dtypes == 'float64' or data[attr].dtypes == 'int64'):
             noeud = Node(data.loc[data[attr] <= so])
             Noeud.child.append(noeud)
             noeud.parent = Noeud    
@@ -34,7 +34,6 @@ def GenerationArbre(Noeud, seuil):
         else:
             Noeud.split.pop(1)
             if len(np.unique(data[attr])) >= 2:
-                #print('creation de child')
                 for val in data[attr].value_counts().index:
                     Noeud.split.append(val)
                     noeud = Node(data.loc[data[attr] == val])
