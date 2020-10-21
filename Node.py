@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Oct 13 10:43:27 2020
-
-@author: jnique
-"""
 
 class Node:
 

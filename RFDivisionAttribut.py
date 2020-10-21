@@ -1,18 +1,17 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 12 11:54:58 2020
 
-@author: jnique
-"""
+import pandas as pd
+import numpy as np
+import random
 
 def RFDivisionAttribut(Noeud, p):
     global Einf, Esup, E, j
     data = Noeud.data
     target = data.columns[-1]
     j = []; MinE = 10 ; so = []
-    if len(np.unique(data.iloc[:,-1])) >= 2: #on teste si il y a au moins deux targets 
+    if len(np.unique(data.iloc[:,-1])) >= 2:
+        #on choisit aléatoirement p variables descriptives
         for attr in np.unique(random.choices(Noeud.var, k = p)):
-            if (data[attr].dtypes == 'float64' or data[attr].dtypes == 'int64'): #la variable est quantitative
+            if (data[attr].dtypes == 'float64' or data[attr].dtypes == 'int64'):
                 unique_values = np.unique(data[attr])
                 for i in range(1,len(unique_values)):
                     s = (unique_values[i] + unique_values[i-1])/2

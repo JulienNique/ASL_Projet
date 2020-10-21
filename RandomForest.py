@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Oct 13 19:31:26 2020
 
-@author: julien
-"""
 import random
 from Node import *
-from GenerationArbre import *
+from RFGenerationArbre import *
 from RFDivisionAttribut import *
 
 #En arguments de la fonction RandomForest :

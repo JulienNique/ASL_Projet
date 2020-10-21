@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Oct 13 13:29:50 2020
-
-@author: jnique
-"""
 
 import random
 from GenerationArbre import *
