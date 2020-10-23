@@ -26,7 +26,7 @@ def GenerationArbre(Noeud, seuil):
         #pour une variable qualitative
         else:
             Noeud.split.pop(1)
-            if len(np.unique(data[attr])) >= 2:
+            if len(data[attr].value_counts().index) >= 2:
                 for val in data[attr].value_counts().index:
                     Noeud.split.append(val)
                     noeud = Node(data.loc[data[attr] == val])

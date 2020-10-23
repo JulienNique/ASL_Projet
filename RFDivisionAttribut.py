@@ -33,7 +33,7 @@ def RFDivisionAttribut(Noeud, p):
                     if (E < MinE):
                         MinE = E ; j = attr ; so = s
             else:
-                if (len(np.unique(data[attr])) >= 2):
+                if (len(data[attr].value_counts().index) >= 2):
                     E = 0
                     N = len(data[attr])
                     for s in data[attr].value_counts().index:

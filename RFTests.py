@@ -11,14 +11,20 @@ from RandomForest import *
 
 #Titanic
 data = pd.read_csv("C:/Users/julien/Google Drive/DataSience/Machine Learning/Titanic/all/train.csv", sep=";")
-data.dropna(subset=['Age'], how='all', inplace = True)
+data.dropna(how='all', inplace = True)
 
-data = data[['Age','Pclass','Sex', 'Survived']]
+data = data[['Age','Pclass','Sex','Embarked','Survived']]
 data_train, data_test = train_test_split(data, test_size=0.10)
 
 noeud = Node(data_train)
-forest = RandomForest(noeud, 1, 10, 3)
+forest = RandomForest(noeud, 1, 1, 4)
 
 ypred = RFPrediction(forest, data_test)
 score = sum(ypred == data_test['Survived'])/len(ypred)
 print('Le score est de :', score)
+
+# a = [1, 2, 3]
+# try:
+#     pos = a.index(10)
+# except ValueError:
+#     print('not found')

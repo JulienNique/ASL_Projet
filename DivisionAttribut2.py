@@ -43,7 +43,7 @@ def DivisionAttribut(data):
           else: #la variable est qualitative
             attr = data.columns[col_index]
             #on teste que la variable contient au moins deux modalités
-            if (len(np.unique(data[attr])) >= 2):
+            if (len(data[attr].value_counts().index) >= 2):
               #on calcule l'entropie
               E = 0
               N = len(data[attr])

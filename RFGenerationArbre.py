@@ -24,7 +24,7 @@ def RFGenerationArbre(Noeud, seuil, p):
         else:
             Noeud.split.pop(1)
             Noeud.var.remove(attr)
-            if len(np.unique(data[attr])) >= 2:
+            if len(data[attr].value_counts().index) >= 2:
                 for val in data[attr].value_counts().index:
                     Noeud.split.append(val)
                     noeud = Node(data.loc[data[attr] == val])

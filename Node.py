@@ -33,9 +33,18 @@ def Prediction(Arbre,X):
                     noeud = noeud.child[0]
                 else:
                     noeud = noeud.child[1]
-            else:
+            elif x[noeud.split[0]] in noeud.split[1:]:
                 pos = noeud.split[1:].index(x[noeud.split[0]])
                 noeud = noeud.child[pos]
+            else:
+                break
+                # try:
+                #     pos = noeud.split[1:].index(x[noeud.split[0]])
+                # except IndexError:
+                #     pos = -1
+                #     break
+                # if pos != -1:
+                #     noeud = noeud.child[pos]
                 
         ypred.append(noeud.classeMaj)
     return ypred
