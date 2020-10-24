@@ -14,17 +14,13 @@ data = pd.read_csv("C:/Users/julien/Google Drive/DataSience/Machine Learning/Tit
 data.dropna(how='all', inplace = True)
 
 data = data[['Age','Pclass','Sex','Embarked','Survived']]
-data_train, data_test = train_test_split(data, test_size=0.10)
+data_train, data_test = train_test_split(data, test_size=0.30)
 
-noeud = Node(data_train)
-forest = RandomForest(noeud, 1, 1, 4)
-
-ypred = RFPrediction(forest, data_test)
-score = sum(ypred == data_test['Survived'])/len(ypred)
-print('Le score est de :', score)
-
-# a = [1, 2, 3]
-# try:
-#     pos = a.index(10)
-# except ValueError:
-#     print('not found')
+scores = []
+for nbtests in range(10):
+    racine = Node(data_train)
+    forest = RandomForest(racine, 1, 10, 2)
+    ypred = RFPrediction(forest, data_test)
+    score = sum(ypred == data_test['Survived'])/len(ypred)
+    scores.append(score)
+print('Le score moyen est de :', np.mean(scores))
